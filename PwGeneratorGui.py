@@ -59,7 +59,7 @@ class App(customtkinter.CTk):
 
         #Input Nome sito/app
         self.input1 = customtkinter.CTkEntry(master=self.frame_left,
-                                             placeholder_text="Nome sito/app",
+                                             placeholder_text="Site / App",
                                              width=250,
                                              height=40,
                                              border_width=2,
@@ -68,7 +68,7 @@ class App(customtkinter.CTk):
 
         #Input Nome utente (se presente)
         self.input2 = customtkinter.CTkEntry(master=self.frame_left,
-                                             placeholder_text="Nome utente (se presente)",
+                                             placeholder_text="Username / Email",
                                              width=250,
                                              height=40,
                                              border_width=2,
@@ -77,7 +77,7 @@ class App(customtkinter.CTk):
 
         #Input Mai rubato l'account?
         self.input3 = customtkinter.CTkEntry(master=self.frame_left,
-                                             placeholder_text="Mai rubato l'account?",
+                                             placeholder_text="Have stolen",
                                              width=250,
                                              height=40,border_width=2,
                                              corner_radius=10)
