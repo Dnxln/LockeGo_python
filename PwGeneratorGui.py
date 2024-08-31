@@ -57,7 +57,7 @@ class App(customtkinter.CTk):
                                             font=("Roboto", 24))
         self.label.place(relx=0.5, rely=0.1, anchor=tkinter.N)
 
-        #Input Nome sito/app
+        #Input Site / App
         self.input1 = customtkinter.CTkEntry(master=self.frame_left,
                                              placeholder_text="Site / App",
                                              width=250,
@@ -66,7 +66,7 @@ class App(customtkinter.CTk):
                                              corner_radius=10)
         self.input1.place(relx=0.5, rely=0.25, anchor=tkinter.N) # 1
 
-        #Input Nome utente (se presente)
+        #Input Username / Email
         self.input2 = customtkinter.CTkEntry(master=self.frame_left,
                                              placeholder_text="Username / Email",
                                              width=250,
@@ -75,7 +75,7 @@ class App(customtkinter.CTk):
                                              corner_radius=10)
         self.input2.place(relx=0.5, rely=0.45, anchor=tkinter.N) # 3
 
-        #Input Mai rubato l'account?
+        #Input Have stolen
         self.input3 = customtkinter.CTkEntry(master=self.frame_left,
                                              placeholder_text="Have stolen",
                                              width=250,
@@ -104,7 +104,7 @@ class App(customtkinter.CTk):
                                                corner_radius=8,
                                                font=("Robot", 17),
                                                text="Generate",
-                                               command=self.button_event) #evento dopo aver cliccato il bottone
+                                               command=self.button_event)
                                             
         self.button1.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
 
@@ -261,15 +261,12 @@ def program():
 
 
 
-    #1A PARTE (lavoro sugli input base in maniera basilare):
-    #Encodo gli input di base in sha256
     ns_ = sha256(ns.encode('utf-8')).hexdigest()
     p1_ = sha256(p1.encode('utf-8')).hexdigest()
     p2_ = sha256(p2.encode('utf-8')).hexdigest()
     p3_ = sha256(p3.encode('utf-8')).hexdigest()
     seed = ""
 
-    #Metto in loop gli input di base
     ns_loop = ""
     ns_loop = loop(ns)
     p1_loop = ""
@@ -281,35 +278,28 @@ def program():
 
 
 
-    #2A PARTE (faccio una prima password):
-    #Creo un seed usando le parole encodate in sha256 unendole carattere per carattere
-    for i in range(63): #63 e non 64 perchè ho il cazzo lungo
+    for i in range(63):
 
         seed += ns_[i]
         seed += p1_[i]
         seed += p2_[i]
         seed += p3_[i]
 
-    #Tramite il seed creo una password
     password = md5(seed.encode('utf-8')).hexdigest()                                    
-    password_ = list(password) #rendo la password una lista divisa per caratteri
+    password_ = list(password)
 
 
 
-    #3A PARTE (setuppo la 4A parte facendo tutti i calcoli matematici del caso):
-    #Creo dei numeri randomici tra due limiti per ogni tipologia di caratteri
     percUc = int(randomPerc(22, 28, ns_, p1_, p2_, p3_, seed))
     percSc = int(randomPerc(28, 33, ns_, p1_, p2_, p3_, seed))
     percNb = int(randomPerc(18, 23, ns_, p1_, p2_, p3_, seed))
     percLc = ((100 - percUc) - percSc) - percNb
 
-    #Creo la percenutale effettiva
     percUc = (32*percUc) / 100
     percSc = (32*percSc) / 100
     percNb = (32*percNb) / 100
     percLc = (32*percLc) / 100
 
-    #Conto a quanto ammontano ogni tipologia di carattere nella password
     totUc = charCounter(password_, listUc)
     totSc = charCounter(password_, listSc)
     totNc = charCounter(password_, listNb)
@@ -317,7 +307,6 @@ def program():
 
 
 
-    #4A PARTE (creo la password definitiva mettendo caratteri speciali e maiuscole):
     check = 0
     tup = (password_, totUc, totSc, totNc, totLc)
     while check == 0:
